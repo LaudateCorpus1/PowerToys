@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="Controls\SettingsPageControl\PageLink.cs" />
     <Compile Include="Converters\AwakeModeToIntConverter.cs" />
+    <Compile Include="Converters\FindMyMouseActivationShakeMouseIntToVisibilityConverter.cs" />
     <Compile Include="Converters\ImageResizerFitToStringConverter.cs" />
     <Compile Include="Converters\ImageResizerUnitToStringConverter.cs" />
     <Compile Include="Converters\UpdateStateToBoolConverter.cs" />
@@ -166,6 +167,9 @@
     </Compile>
     <Compile Include="OOBE\Views\OobeMouseUtils.xaml.cs">
       <DependentUpon>OobeMouseUtils.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OOBE\Views\OobeWhatsNew.xaml.cs">
+      <DependentUpon>OobeWhatsNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="OOBE\Views\OobeOverview.xaml.cs">
       <DependentUpon>OobeOverview.xaml</DependentUpon>
@@ -408,6 +412,10 @@
     <Page Include="OOBE\Views\OobeMouseUtils.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OOBE\Views\OobeWhatsNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="OOBE\Views\OobeOverview.xaml">
       <SubType>Designer</SubType>
