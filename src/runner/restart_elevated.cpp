@@ -41,7 +41,7 @@ bool restart_if_scheduled()
     case RestartAsElevatedOpenSettings:
         return run_elevated(exe_path.get(), L"--open-settings");
     case RestartAsNonElevated:
-        return run_non_elevated(exe_path.get(), L"--dont-elevate", NULL);
+        return run_non_elevated(exe_path.get(), L"", NULL);
     default:
         return false;
     }

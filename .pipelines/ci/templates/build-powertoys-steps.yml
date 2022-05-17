@@ -8,12 +8,6 @@ steps:
   clean: true
 
 - task: UseDotNet@2
-  displayName: 'Use .NET 3.1 for unit test SDK'
-  inputs:
-    packageType: sdk
-    version: '3.1.x'
-
-- task: UseDotNet@2
   displayName: 'Use .NET 6 SDK'
   inputs:
     packageType: sdk
@@ -83,6 +77,25 @@ steps:
     maximumCpuCount: true
 
 - task: NuGetCommand@2
+  displayName: Restore NuGet packages for StylesReportTool.sln
+  inputs:
+    command: restore
+    feedsToUse: config
+    configPath: NuGet.config
+    restoreSolution: tools\StylesReportTool\StylesReportTool.sln
+    restoreDirectory: '$(Build.SourcesDirectory)\tools\StylesReportTool\packages'
+
+- task: VSBuild@1
+  displayName: 'Build StylesReportTool.sln'
+  inputs:
+    solution: '**\StylesReportTool.sln'
+    vsVersion: 17.0
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+    msbuildArgs: ${{ parameters.additionalBuildArguments }}
+    maximumCpuCount: true
+
+- task: NuGetCommand@2
   displayName: Restore NuGet packages for PowerToysSetup.sln
   inputs:
     command: restore
@@ -92,13 +105,24 @@ steps:
     restoreDirectory: '$(Build.SourcesDirectory)\installer\packages'
 
 - task: VSBuild@1
-  displayName: 'Build PowerToysSetup.sln'
+  displayName: 'Build PowerToys MSI'
   inputs:
     solution: '**\installer\PowerToysSetup.sln'
     vsVersion: 17.0
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
-    msbuildArgs: ${{ parameters.additionalBuildArguments }}
+    msbuildArgs: /t:PowerToysInstaller ${{ parameters.additionalBuildArguments }}
+    maximumCpuCount: true
+
+- task: VSBuild@1
+  displayName: 'Build PowerToys Bootstrapper'
+  inputs:
+    solution: '**\installer\PowerToysSetup.sln'
+    vsVersion: 17.0
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+    msbuildArgs: /t:PowerToysBootstrapper ${{ parameters.additionalBuildArguments }}
+    clean: false
     maximumCpuCount: true
 
 # directly not doing WinAppDriver testing

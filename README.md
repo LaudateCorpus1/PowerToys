@@ -9,7 +9,7 @@
 | Architecture | Solution (Main) | Solution (Stable) | Installer (Main) |
 |--------------|-----------------|-------------------|------------------|
 | x64 | [![Build Status for Main](https://dev.azure.com/ms/PowerToys/_apis/build/status/microsoft.PowerToys?branchName=main)](https://dev.azure.com/ms/PowerToys/_build/latest?definitionId=219&branchName=main) | [![Build Status for Stable](https://dev.azure.com/ms/PowerToys/_apis/build/status/microsoft.PowerToys?branchName=stable)](https://dev.azure.com/ms/PowerToys/_build/latest?definitionId=219&branchName=stable) | [![Build Status Installer pipeline](https://dev.azure.com/microsoft/Dart/_apis/build/status/microsoft.PowerToys?branchName=main)](https://dev.azure.com/microsoft/Dart/_build/latest?definitionId=76541&branchName=main) |
-| ARM64 | Currently investigating | [Issue #490](https://github.com/microsoft/PowerToys/issues/490) |  |
+| ARM64 | Under active development | [Issue #490](https://github.com/microsoft/PowerToys/issues/490) |  |
 
 ## About
 
@@ -28,13 +28,13 @@ Microsoft PowerToys is a set of utilities for power users to tune and streamline
 
 - Windows 11 or Windows 10 v1903 (18362) or newer.
 - Our installer will install the following items:
-   - [.NET Core 3.1.22 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-desktop-3.1.22-windows-x64-installer) or a newer 3.1.x runtime. This is needed currently for the Settings application.
-   - [.NET 6.02 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-desktop-6.0.2-windows-x64-installer) or a newer 6.0.x runtime. 
+   - [.NET 6.0.4 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-desktop-6.0.4-windows-x64-installer) or a newer 6.0.x runtime. 
    - [Microsoft Edge WebView2 Runtime](https://go.microsoft.com/fwlink/p/?LinkId=2124703) bootstrapper. This will install the latest version. 
+   - [Windows App SDK Runtime 1.0.3](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads). This will install version 1.0.3 if this or newer version is not installed already.
 
 ### Via GitHub with EXE [Recommended]
 
- [Microsoft PowerToys GitHub releases page][github-release-link], click on `Assets` at the bottom to show the files available in the release and then click on `PowerToysSetup-0.56.2-x64.exe` to download the PowerToys installer.
+ [Microsoft PowerToys GitHub releases page][github-release-link], click on `Assets` at the bottom to show the files available in the release and then click on `PowerToysSetup-0.58.0-x64.exe` to download the PowerToys installer.
 
 This is our preferred method.
 
@@ -69,109 +69,117 @@ For guidance on developing for PowerToys, please read the [developer docs](/doc/
 
 Our [prioritized roadmap][roadmap] of features and utilities that the core team is focusing on.
 
-### 0.56 - February 2022 Update
+### 0.58 - April 2022 Update
 
-In this release, we focused heavily on stability and improvements.  Below are some of the highlights!
+In this release, we focused on upgrading to new dependencies and building for native ARM64.  Below are some of the highlights!
 
 **Highlights**
 
-- Upgrade notes!  A big feedback items for new versions was upgrade notes.  We have the release notes on GitHub as well.
-- FancyZones zone limit has been increased to 128 zones.  Before the limit was 40.
-- Timezone conversion plugin for PowerToys Run!  Thanks [@TobiasSekan](https://github.com/TobiasSekan)
-- Child and Popup window support for FancyZones.  To enable, go to Settings→FancyZones→Windows. These were bugs we fixed that without realizing it was a useful feature to most.
-- Find my mouse will now activate via shaking the mouse with a settings change!
-![Find my mouse setting for Activate to shake](https://user-images.githubusercontent.com/1462282/156048784-5a16ae0e-3551-47c6-a601-833acc9e893b.png)
+- Most of the work for running natively on ARM64 has been included in the repo. Thanks [@snickler](https://github.com/snickler)!
+- Uses of the obsolete WebBrowser control were replaced with WebView 2.
+- All uses of .NET Core 3.1 were removed. PowerToys now runs on .NET 6.
+- Settings no longer runs on XAML Islands and is now running on WinUI 3, fixing many bugs related to XAML islands.
+
+### General
+
+- Spell checking fixes in the code. Thanks [@jsoref](https://github.com/jsoref)!
+- Fix for a CI error related to spell checking due to a GitHub API change. Thanks [@jsoref](https://github.com/jsoref)!
+- Fixed the documentation references to GitHub. Thanks [@Cyl18](https://github.com/Cyl18)!
+
+### ARM64
+
+- Prepare solution and property files for ARM64 port. Thanks [@snickler](https://github.com/snickler)!
+- Port unhandled exception handler to ARM64. Thanks [@snickler](https://github.com/snickler)!
+- Port of the Settings projects to ARM64. Thanks [@snickler](https://github.com/snickler)!
+- Port of most of the PowerToys to ARM64. Thanks [@snickler](https://github.com/snickler)!
+- Port of the debug utilities to ARM64.
 
 ### Always on Top
 
-- Fixed excess GPU / CPU usage when enabled
-- If border has focus, not closable via F4
-- Changing border sizes should resize correctly for existing windows
-- Border goes away with Outlook modal windows 
+- Fix for topmost state of the window resetting for some applications. (This was a hotfix for 0.57)
 
 ### ColorPicker
 
-- No longer crashes during theme change
+- The CIEXYZ format is now properly show in upper case.
 
 ### FancyZones
 
-- Increased zone limit from 40 to 128.
-- Child and Popup window support for FancyZones. To enable, go to Settings→FancyZones→Windows. These were bugs we fixed that without realizing it was a useful feature to most.
+- Restore rounded corners on Windows 11 and add a setting to control this behavior. (This was a hotfix for 0.57)
+- Fixed an edge case where the Windows Terminal window wouldn't be snapped when opened. (This was a hotfix for 0.57)
+- Improved narrator support in the Grid Editor. (This was a hotfix for 0.57)
+- Fixed a bug when restoring rounded corners on Windows 11. (This was a hotfix for 0.57)
+- Fix for windows not being resized correctly on different dpi settings. (This was a hotfix for 0.57)
+- Removed resolution from the screen identifier so zones aren't reset when resolution changes.
+- Scale the canvas layout when editing according to new scaling/resolution.
+- Shipping a new tool to help debug windows interactions with FancyZones.
 
 ### File explorer
 
-- Fixes for Dev file preview: (Thanks [@Aaron-Junker](https://github.com/Aaron-Junker))
-  - Fix fix for object reference not set.
-  - Fix for encoding UTF-8.
-  - Fix for file is in use. 
-  - Fix for saying the file is too big.
-
-### Image Resizer
-
-- Fix for `invalid operation` error. [@CleanCodeDeveloper](https://github.com/CleanCodeDeveloper)!
+- Fix for a crash in dev file preview if the settings file hadn't been created yet. (This was a hotfix for 0.57)
+- New file types were added to dev file preview (".reg", ".xslt", ".xsd", ".wsdl", ".ino", ".pde", ".razor"). Thanks [@Aaron-Junker](https://github.com/Aaron-Junker)!
+- Fix an existing "file still in use" issue in dev file preview. Thanks [@Aaron-Junker](https://github.com/Aaron-Junker)!
+- Dev file preview is now able to interpret file extensions in a case-insensitive way. Thanks [@Aaron-Junker](https://github.com/Aaron-Junker)!
+- SVG and markdown viewers no longer use WebBrowser and use WebView2 instead.
+- Markdown preview now respects the dark mode settings on Windows. Thanks [@davidegiacometti](https://github.com/davidegiacometti)!
 
 ### Mouse utility
 
-- Find my mouse will now activate via shaking the mouse with a settings change!
-- Find my mouse now can excludes apps.
-- Fix for crosshair thickness looking odd due to anti-aliasing
-- Fix for a hard crash on crosshair (This was a hotfix for 0.55)
-
-### PowerRename
-
-- Will not spells check file names anymore. Thanks [@niels9001](https://github.com/niels9001)
-- Autocomplete result box to not obscure apply button. Thanks [@niels9001](https://github.com/niels9001)
-- Regex fix
+- Fix for the bug causing shortcuts set on icons to not activate when a mouse utility was active on specific monitor configurations.
 
 ### PowerToys Run
 
-- Timezone conversion plugin for PowerToys Run!  Thanks [@TobiasSekan](https://github.com/TobiasSekan)
-- Hexadecimal and binary numbers now are supported in the calculator plugin. This was added a bit ago and we'd like to extend a belated thanks to [@gsuberland](https://github.com/gsuberland)
-- Terminal plugin performance boost.  Thanks [@htcfreek](https://github.com/htcfreek)!
-- Terminal will now be found via the Program plugin again.  
-- Shutdown command is now using hybrid fast argument for shutting down
-- Support for VSCodium with VS Code workplace plugin. Thanks [@makeProjectGreatAgain](https://github.com/makeProjectGreatAgain)
-
-### Video conference mute
-
-- nVidia Broadcast software won't crash anymore
+- Fix for PowerToys Run using high CPU and memory when updating its settings. (This was a hotfix for 0.57)
+- Add the "Run as different user" feature to the Program, Shell, and Search plugins. Thanks [@htcfreek](https://github.com/htcfreek)! (This was a hotfix for 0.57)
+- Fix for a WindowWalker crash when a Virtual Desktop registry key is not set. Thanks [@htcfreek](https://github.com/htcfreek)! (This was a hotfix for 0.57)
+- Fix for VS Code Workspaces not using the user's path variable right after an install or update. Thanks [@ricardosantos9521](https://github.com/ricardosantos9521)! (This was a hotfix for 0.57)
+- Fix for the System plugin causing PowerToys Run to be slow when many network interfaces exist. Thanks [@htcfreek](https://github.com/htcfreek)! (This was a hotfix for 0.57)
+- Fix for the Program plugin not showing special shortcuts with empty targets, like Control Panel. (This was a hotfix for 0.57)
+- Additional logging for the Terminal plugin. Thanks [@davidegiacometti](https://github.com/davidegiacometti)! (This was a hotfix for 0.57)
+- Web Search and URI plugins have better code for detecting the default browser now.
+- Fix for the Services plugin not manipulating service names with spaces correctly. Thanks [@davidegiacometti](https://github.com/davidegiacometti)!
+- Fix for the Terminal plugin not recognizing profiles correctly. Thanks [@davidegiacometti](https://github.com/davidegiacometti)!
+- Fix for latest VSCode insiders build not showing up in the VSCode Workspaces plugin. Thanks [@JacobDeuchert](https://github.com/JacobDeuchert)!
+- Increased floating number precision in the Unit Converter plugin.
+- VSCode Workspaces now finds portable installations of VS Code. Thanks [@harvastum](https://github.com/harvastum)
+- Fixed an issue starting PowerToys Run when the desktop is not initialized. Thanks [@davidegiacometti](https://github.com/davidegiacometti)!
 
 ### Settings
 
-- Upgrade notes in OOBE
-- Fix for settings being lost (This was a hotfix for 0.55)
-- UX improvements. Thanks [@niels9001](https://github.com/niels9001)
+- Settings now runs on WinUI3 instead of XAML islands.
+- Settings no longer runs as an administrator when runner is started as an administrator.
+
+### Runner
+
+- Use sensible default times for rechecking for an update, to avoid writing to the logs in a loop. (This was a hotfix for 0.57)
+- Runner cleans up the update directory if the installation is up to date. Thanks [@davidegiacometti](https://github.com/davidegiacometti)!
 
 ### Installer
 
-- Believe we have a fix for the long hated "app.dark.png is missing" error. Thanks to [@robmen](https://github.com/robmen) for having a great blog!
-- Installer will launch PowerToys under appropriate elevation versus Admin only due to UAC prompt for installation (This was a hotfix for 0.55)
-- PowerToys will now start if installed under different user
+- Distribute a signed .msi inside the .exe installer bootstrapper. (This was a hotfix for 0.57)
+- Removed the .NET core dependency from the installer.
+- Partial support for an ARM64 installer.
+- Updated the .NET to 6.0.4.
+- Force update all files on reinstall/update, to try and fix installation issues.
+
 
 ### Development
 
-- ARM64 - We removed the last .NET Framework dependency.  Thanks [@snickler](https://github.com/snickler) for helping get this across the finish line!
-- .NET 6 upgrade, now on the newest and hottest .NET runtime
-- Code analyzers have been upgraded!  Thanks [@CleanCodeDeveloper](https://github.com/CleanCodeDeveloper)!
-- Symbols are back!
-- Code refactoring, thanks [@CleanCodeDeveloper](https://github.com/CleanCodeDeveloper) and [@cyberrex5](https://github.com/cyberrex5) for helping here!
-- We are now on VS 2022 with the .NET 6 upgrade.
+- PowerToys no longer takes a dependency on .NET core.
+- WinUI3 is a new dependency. Settings now targets win10-x64 and win10-arm64 due to this.
 
 #### Community contributions
 
-We'd like to directly mention certain contributors (in alphabetical order) for their continued community support this month and helping directly make PowerToys a better piece of software. 
-[@Aaron-Junker](https://github.com/Aaron-Junker), [@CleanCodeDeveloper](https://github.com/CleanCodeDeveloper), [@cyberrex5](https://github.com/cyberrex5), [@franky920920](https://github.com/franky920920), [@gsuberland](https://github.com/gsuberland), [@htcfreek](https://github.com/htcfreek), [@jay-o-way](https://github.com/jay-o-way), [@makeProjectGreatAgain](https://github.com/makeProjectGreatAgain), [@niels9001](https://github.com/niels9001), [@robmen](https://github.com/robmen), [@snickler](https://github.com/snickler), and [@TobiasSekan ](https://github.com/TobiasSekan).
+We'd like to directly mention certain contributors (in alphabetical order) for their continued community support this month and helping directly make PowerToys a better piece of software.  
+[@Aaron-Junker](https://github.com/Aaron-Junker), [@CleanCodeDeveloper](https://github.com/CleanCodeDeveloper), [@davidegiacometti](https://github.com/davidegiacometti), [@dend](https://github.com/dend), [@franky920920](https://github.com/franky920920), [@htcfreek](https://github.com/htcfreek), [@jay-o-way](https://github.com/jay-o-way), [@jsoref](https://github.com/jsoref), [@niels9001](https://github.com/niels9001), [@snickler](https://github.com/snickler).
 
 
-#### What is being planned for v0.57
+#### What is being planned for v0.59
 
-For [v0.57][github-next-release-work], we'll start work on below:
+For [v0.59][github-next-release-work], we'll work on below:
 
-- Start work on two new PowerToys
-- Improvements to PowerToy Run plugins
+- Environment Variables Editor PowerToy
+- Wrap up the ARM64 build
 - Stability / bug fixes
-- Validation pass again using WinUI 3.1 for Settings
-- Adding new file types to dev file preview
 
 ## PowerToys Community
 
@@ -198,5 +206,5 @@ The application logs basic telemetry. Our Telemetry Data page (Coming Soon) has 
 [usingPowerToys-docs-link]: https://aka.ms/powertoys-docs
 
 <!-- items that need to be updated release to release -->
-[github-next-release-work]: https://github.com/microsoft/PowerToys/issues?q=is%3Aopen+is%3Aissue+project%3Amicrosoft%2FPowerToys%2F30
-[github-current-release-work]: https://github.com/microsoft/PowerToys/issues?q=is%3Aopen+is%3Aissue+project%3Amicrosoft%2FPowerToys%2F29
+[github-next-release-work]: https://github.com/microsoft/PowerToys/issues?q=is%3Aopen+is%3Aissue+project%3Amicrosoft%2FPowerToys%2F32
+[github-current-release-work]: https://github.com/microsoft/PowerToys/issues?q=is%3Aopen+is%3Aissue+project%3Amicrosoft%2FPowerToys%2F31

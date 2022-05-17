@@ -156,6 +156,17 @@ jobs:
       maximumCpuCount: true
 
   - task: VSBuild@1
+    displayName: Build StylesReportTool
+    inputs:
+      solution: '**/tools/StylesReportTool/StylesReportTool.sln'
+      vsVersion: 17.0
+      msbuildArgs: /p:CIBuild=true /bl:$(Build.SourcesDirectory)\msbuild.binlog
+      platform: $(BuildPlatform)
+      configuration: $(BuildConfiguration)
+      clean: true
+      maximumCpuCount: true
+
+  - task: VSBuild@1
     displayName: Build PowerToysSetupCustomActions
     inputs:
       solution: '**/installer/PowerToysSetup.sln'
@@ -169,7 +180,7 @@ jobs:
   - task: VSBuild@1
     displayName: Publish Settings for Packaging
     inputs:
-      solution: 'src/settings-ui/PowerToys.Settings/PowerToys.Settings.csproj'
+      solution: 'src/settings-ui/Settings.UI/PowerToys.Settings.csproj'
       vsVersion: 17.0
       msbuildArgs: >-
         /target:Publish
@@ -185,6 +196,70 @@ jobs:
     displayName: Publish Launcher for Packaging
     inputs:
       solution: 'src/modules/launcher/PowerLauncher/PowerLauncher.csproj'
+      vsVersion: 17.0
+      # The arguments should be the same as the ones for Settings; make sure they are.
+      msbuildArgs: >-
+        /target:Publish
+        /p:Configuration=$(BuildConfiguration);Platform=$(BuildPlatform);AppxBundle=Never
+        /p:VCRTForwarders-IncludeDebugCRT=false
+        /p:PowerToysRoot=$(Build.SourcesDirectory)
+        /p:PublishProfile=InstallationPublishProfile.pubxml
+      platform: $(BuildPlatform)
+      configuration: $(BuildConfiguration)
+      maximumCpuCount: true
+
+  - task: VSBuild@1
+    displayName: Publish Monaco Preview Handler for Packaging
+    inputs:
+      solution: 'src/modules/previewpane/MonacoPreviewHandler/MonacoPreviewHandler.csproj'
+      vsVersion: 17.0
+      # The arguments should be the same as the ones for Settings; make sure they are.
+      msbuildArgs: >-
+        /target:Publish
+        /p:Configuration=$(BuildConfiguration);Platform=$(BuildPlatform);AppxBundle=Never
+        /p:VCRTForwarders-IncludeDebugCRT=false
+        /p:PowerToysRoot=$(Build.SourcesDirectory)
+        /p:PublishProfile=InstallationPublishProfile.pubxml
+      platform: $(BuildPlatform)
+      configuration: $(BuildConfiguration)
+      maximumCpuCount: true
+
+  - task: VSBuild@1
+    displayName: Publish Markdown Preview Handler for Packaging
+    inputs:
+      solution: 'src/modules/previewpane/MarkdownPreviewHandler/MarkdownPreviewHandler.csproj'
+      vsVersion: 17.0
+      # The arguments should be the same as the ones for Settings; make sure they are.
+      msbuildArgs: >-
+        /target:Publish
+        /p:Configuration=$(BuildConfiguration);Platform=$(BuildPlatform);AppxBundle=Never
+        /p:VCRTForwarders-IncludeDebugCRT=false
+        /p:PowerToysRoot=$(Build.SourcesDirectory)
+        /p:PublishProfile=InstallationPublishProfile.pubxml
+      platform: $(BuildPlatform)
+      configuration: $(BuildConfiguration)
+      maximumCpuCount: true
+
+  - task: VSBuild@1
+    displayName: Publish Svg Preview Handler for Packaging
+    inputs:
+      solution: 'src/modules/previewpane/SvgPreviewHandler/SvgPreviewHandler.csproj'
+      vsVersion: 17.0
+      # The arguments should be the same as the ones for Settings; make sure they are.
+      msbuildArgs: >-
+        /target:Publish
+        /p:Configuration=$(BuildConfiguration);Platform=$(BuildPlatform);AppxBundle=Never
+        /p:VCRTForwarders-IncludeDebugCRT=false
+        /p:PowerToysRoot=$(Build.SourcesDirectory)
+        /p:PublishProfile=InstallationPublishProfile.pubxml
+      platform: $(BuildPlatform)
+      configuration: $(BuildConfiguration)
+      maximumCpuCount: true
+
+  - task: VSBuild@1
+    displayName: Publish Svg Thumbnail Provider for Packaging
+    inputs:
+      solution: 'src/modules/previewpane/SvgThumbnailProvider/SvgThumbnailProvider.csproj'
       vsVersion: 17.0
       # The arguments should be the same as the ones for Settings; make sure they are.
       msbuildArgs: >-
@@ -263,10 +338,10 @@ jobs:
     inputs:
       solution: '**/installer/PowerToysSetup.sln'
       vsVersion: 17.0
-      msbuildArgs: /p:CIBuild=true /bl:$(Build.SourcesDirectory)\msbuild.binlog
+      msbuildArgs: /p:CIBuild=true /bl:$(Build.SourcesDirectory)\msbuild.binlog /t:PowerToysBootstrapper
       platform: $(BuildPlatform)
       configuration: $(BuildConfiguration)
-      clean: true
+      clean: false # don't undo our hard work above by deleting the MSI
       maximumCpuCount: true
 
   - task: CmdLine@2

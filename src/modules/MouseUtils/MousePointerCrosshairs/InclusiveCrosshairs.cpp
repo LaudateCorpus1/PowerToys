@@ -175,6 +175,9 @@ void InclusiveCrosshairs::UpdateCrosshairsPosition()
 {
     POINT ptCursor;
 
+    // HACK: Draw with 1 pixel off. Otherwise Windows glitches the task bar transparency when a transparent window fill the whole screen.
+    SetWindowPos(m_hwnd, HWND_TOPMOST, GetSystemMetrics(SM_XVIRTUALSCREEN) + 1, GetSystemMetrics(SM_YVIRTUALSCREEN) + 1, GetSystemMetrics(SM_CXVIRTUALSCREEN) - 2, GetSystemMetrics(SM_CYVIRTUALSCREEN) - 2, 0);
+
     GetCursorPos(&ptCursor);
 
     HMONITOR cursorMonitor = MonitorFromPoint(ptCursor, MONITOR_DEFAULTTONEAREST);
@@ -209,24 +212,24 @@ void InclusiveCrosshairs::UpdateCrosshairsPosition()
     float halfPixelAdjustment = m_crosshairs_thickness % 2 == 1 ? 0.5f : 0.0f;
 
     // Position crosshairs components around the mouse pointer.
-    m_left_crosshairs_border.Offset({ (float)ptCursor.x - m_crosshairs_radius + m_crosshairs_border_size, (float)ptCursor.y - halfPixelAdjustment, .0f });
-    m_left_crosshairs_border.Size({ (float)ptCursor.x - (float)ptMonitorUpperLeft.x - m_crosshairs_radius + m_crosshairs_border_size, (float)m_crosshairs_thickness + m_crosshairs_border_size * 2 });
-    m_left_crosshairs.Offset({ (float)ptCursor.x - m_crosshairs_radius, (float)ptCursor.y - halfPixelAdjustment, .0f });
-    m_left_crosshairs.Size({ (float)ptCursor.x - (float)ptMonitorUpperLeft.x - m_crosshairs_radius, (float)m_crosshairs_thickness });
+    m_left_crosshairs_border.Offset({ (float)ptCursor.x - m_crosshairs_radius + m_crosshairs_border_size + halfPixelAdjustment * 2, (float)ptCursor.y + halfPixelAdjustment, .0f });
+    m_left_crosshairs_border.Size({ (float)ptCursor.x - (float)ptMonitorUpperLeft.x - m_crosshairs_radius + m_crosshairs_border_size + halfPixelAdjustment * 2, (float)m_crosshairs_thickness + m_crosshairs_border_size * 2 });
+    m_left_crosshairs.Offset({ (float)ptCursor.x - m_crosshairs_radius + halfPixelAdjustment * 2, (float)ptCursor.y + halfPixelAdjustment, .0f });
+    m_left_crosshairs.Size({ (float)ptCursor.x - (float)ptMonitorUpperLeft.x - m_crosshairs_radius + halfPixelAdjustment * 2, (float)m_crosshairs_thickness });
 
-    m_right_crosshairs_border.Offset({ (float)ptCursor.x + m_crosshairs_radius - m_crosshairs_border_size, (float)ptCursor.y - halfPixelAdjustment, .0f });
+    m_right_crosshairs_border.Offset({ (float)ptCursor.x + m_crosshairs_radius - m_crosshairs_border_size, (float)ptCursor.y + halfPixelAdjustment, .0f });
     m_right_crosshairs_border.Size({ (float)ptMonitorBottomRight.x - (float)ptCursor.x - m_crosshairs_radius + m_crosshairs_border_size, (float)m_crosshairs_thickness + m_crosshairs_border_size * 2 });
-    m_right_crosshairs.Offset({ (float)ptCursor.x + m_crosshairs_radius, (float)ptCursor.y - halfPixelAdjustment, .0f });
+    m_right_crosshairs.Offset({ (float)ptCursor.x + m_crosshairs_radius, (float)ptCursor.y + halfPixelAdjustment, .0f });
     m_right_crosshairs.Size({ (float)ptMonitorBottomRight.x - (float)ptCursor.x - m_crosshairs_radius, (float)m_crosshairs_thickness });
 
-    m_top_crosshairs_border.Offset({ (float)ptCursor.x - halfPixelAdjustment, (float)ptCursor.y - m_crosshairs_radius + m_crosshairs_border_size, .0f });
-    m_top_crosshairs_border.Size({ (float)m_crosshairs_thickness + m_crosshairs_border_size * 2, (float)ptCursor.y - (float)ptMonitorUpperLeft.y - m_crosshairs_radius + m_crosshairs_border_size });
-    m_top_crosshairs.Offset({ (float)ptCursor.x - halfPixelAdjustment, (float)ptCursor.y - m_crosshairs_radius, .0f });
-    m_top_crosshairs.Size({ (float)m_crosshairs_thickness, (float)ptCursor.y - (float)ptMonitorUpperLeft.y - m_crosshairs_radius });
+    m_top_crosshairs_border.Offset({ (float)ptCursor.x + halfPixelAdjustment, (float)ptCursor.y - m_crosshairs_radius + m_crosshairs_border_size + halfPixelAdjustment * 2, .0f });
+    m_top_crosshairs_border.Size({ (float)m_crosshairs_thickness + m_crosshairs_border_size * 2, (float)ptCursor.y - (float)ptMonitorUpperLeft.y - m_crosshairs_radius + m_crosshairs_border_size + halfPixelAdjustment * 2 });
+    m_top_crosshairs.Offset({ (float)ptCursor.x + halfPixelAdjustment, (float)ptCursor.y - m_crosshairs_radius + halfPixelAdjustment * 2, .0f });
+    m_top_crosshairs.Size({ (float)m_crosshairs_thickness, (float)ptCursor.y - (float)ptMonitorUpperLeft.y - m_crosshairs_radius + halfPixelAdjustment * 2 });
 
-    m_bottom_crosshairs_border.Offset({ (float)ptCursor.x - halfPixelAdjustment, (float)ptCursor.y + m_crosshairs_radius - m_crosshairs_border_size, .0f });
+    m_bottom_crosshairs_border.Offset({ (float)ptCursor.x + halfPixelAdjustment, (float)ptCursor.y + m_crosshairs_radius - m_crosshairs_border_size, .0f });
     m_bottom_crosshairs_border.Size({ (float)m_crosshairs_thickness + m_crosshairs_border_size * 2, (float)ptMonitorBottomRight.y - (float)ptCursor.y - m_crosshairs_radius + m_crosshairs_border_size });
-    m_bottom_crosshairs.Offset({ (float)ptCursor.x - halfPixelAdjustment, (float)ptCursor.y + m_crosshairs_radius, .0f });
+    m_bottom_crosshairs.Offset({ (float)ptCursor.x + halfPixelAdjustment, (float)ptCursor.y + m_crosshairs_radius, .0f });
     m_bottom_crosshairs.Size({ (float)m_crosshairs_thickness, (float)ptMonitorBottomRight.y - (float)ptCursor.y - m_crosshairs_radius });
 
 }
@@ -247,8 +250,6 @@ void InclusiveCrosshairs::StartDrawing()
 {
     Logger::info("Start drawing crosshairs.");
     Trace::StartDrawingCrosshairs();
-    // HACK: Draw with 1 pixel off. Otherwise Windows glitches the task bar transparency when a transparent window fill the whole screen.
-    SetWindowPos(m_hwnd, HWND_TOPMOST, GetSystemMetrics(SM_XVIRTUALSCREEN), GetSystemMetrics(SM_YVIRTUALSCREEN), GetSystemMetrics(SM_CXVIRTUALSCREEN), GetSystemMetrics(SM_CYVIRTUALSCREEN)-1, 0);
     UpdateCrosshairsPosition();
     ShowWindow(m_hwnd, SW_SHOWNOACTIVATE);
     m_visible = true;

@@ -3,10 +3,11 @@
 
 #include <common/display/dpi_aware.h>
 #include <common/logger/logger.h>
+#include <common/utils/elevation.h>
+#include <common/utils/excluded_apps.h>
 #include <common/utils/process_path.h>
 #include <common/utils/winapi_error.h>
 #include <common/utils/window.h>
-#include <common/utils/excluded_apps.h>
 
 #include <FancyZonesLib/FancyZonesWindowProperties.h>
 #include <FancyZonesLib/Settings.h>
@@ -228,7 +229,7 @@ bool FancyZonesWindowUtils::IsCandidateForZoning(HWND window)
         return false;
     }
 
-    std::wstring processPath = get_process_path(window);
+    std::wstring processPath = get_process_path_waiting_uwp(window);
     CharUpperBuffW(const_cast<std::wstring&>(processPath).data(), (DWORD)processPath.length());
     if (IsExcludedByUser(processPath))
     {
@@ -245,30 +246,7 @@ bool FancyZonesWindowUtils::IsCandidateForZoning(HWND window)
 
 bool FancyZonesWindowUtils::IsProcessOfWindowElevated(HWND window)
 {
-    DWORD pid = 0;
-    GetWindowThreadProcessId(window, &pid);
-    if (!pid)
-    {
-        return false;
-    }
-
-    wil::unique_handle hProcess{ OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,
-                                             FALSE,
-                                             pid) };
-
-    wil::unique_handle token;
-    bool elevated = false;
-
-    if (OpenProcessToken(hProcess.get(), TOKEN_QUERY, &token))
-    {
-        TOKEN_ELEVATION elevation;
-        DWORD size;
-        if (GetTokenInformation(token.get(), TokenElevation, &elevation, sizeof(elevation), &size))
-        {
-            return elevation.TokenIsElevated != 0;
-        }
-    }
-    return false;
+    return is_process_of_window_elevated(window);
 }
 
 bool FancyZonesWindowUtils::IsExcludedByUser(const std::wstring& processPath) noexcept
@@ -339,11 +317,6 @@ void FancyZonesWindowUtils::SizeWindowToRect(HWND window, RECT rect) noexcept
     ScreenToWorkAreaCoords(window, rect);
 
     placement.rcNormalPosition = rect;
-
-    // Set window corner preference on Windows 11 to "Do not round"
-    int corner_preference = DWMWCP_DONOTROUND;
-    DwmSetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &corner_preference, sizeof(corner_preference));
-
     placement.flags |= WPF_ASYNCWINDOWPLACEMENT;
 
     auto result = ::SetWindowPlacement(window, &placement);
@@ -373,16 +346,16 @@ void FancyZonesWindowUtils::SaveWindowSizeAndOrigin(HWND window) noexcept
     RECT rect;
     if (GetWindowRect(window, &rect))
     {
-        int width = rect.right - rect.left;
-        int height = rect.bottom - rect.top;
-        int originX = rect.left;
-        int originY = rect.top;
+        float width = static_cast<float>(rect.right - rect.left);
+        float height = static_cast<float>(rect.bottom - rect.top);
+        float originX = static_cast<float>(rect.left);
+        float originY = static_cast<float>(rect.top);
 
         DPIAware::InverseConvert(MonitorFromWindow(window, MONITOR_DEFAULTTONULL), width, height);
         DPIAware::InverseConvert(MonitorFromWindow(window, MONITOR_DEFAULTTONULL), originX, originY);
 
-        std::array<int, 2> windowSizeData = { width, height };
-        std::array<int, 2> windowOriginData = { originX, originY };
+        std::array<int, 2> windowSizeData = { static_cast<int>(width), static_cast<int>(height) };
+        std::array<int, 2> windowOriginData = { static_cast<int>(originX), static_cast<int>(originY) };
         HANDLE rawData;
         memcpy(&rawData, windowSizeData.data(), sizeof rawData);
         SetPropW(window, ZonedWindowProperties::PropertyRestoreSizeID, rawData);
@@ -399,22 +372,19 @@ void FancyZonesWindowUtils::RestoreWindowSize(HWND window) noexcept
         std::array<int, 2> windowSize;
         memcpy(windowSize.data(), &windowSizeData, sizeof windowSize);
 
+        float windowWidth = static_cast<float>(windowSize[0]), windowHeight = static_cast<float>(windowSize[1]);
+
         // {width, height}
-        DPIAware::Convert(MonitorFromWindow(window, MONITOR_DEFAULTTONULL), windowSize[0], windowSize[1]);
+        DPIAware::Convert(MonitorFromWindow(window, MONITOR_DEFAULTTONULL), windowWidth, windowHeight);
 
         RECT rect;
         if (GetWindowRect(window, &rect))
         {
-            rect.right = rect.left + windowSize[0];
-            rect.bottom = rect.top + windowSize[1];
+            rect.right = rect.left + static_cast<int>(windowWidth);
+            rect.bottom = rect.top + static_cast<int>(windowHeight);
             Logger::info("Restore window size");
             SizeWindowToRect(window, rect);
         }
-
-        // Set window corner preference on Windows 11 to "Default"
-        // TODO: Should probably store preference from before snap
-        int corner_preference = DWMWCP_DEFAULT;
-        DwmSetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &corner_preference, sizeof(corner_preference));
 
         ::RemoveProp(window, ZonedWindowProperties::PropertyRestoreSizeID);
     }
@@ -428,8 +398,10 @@ void FancyZonesWindowUtils::RestoreWindowOrigin(HWND window) noexcept
         std::array<int, 2> windowOrigin;
         memcpy(windowOrigin.data(), &windowOriginData, sizeof windowOrigin);
 
+        float windowWidth = static_cast<float>(windowOrigin[0]), windowHeight = static_cast<float>(windowOrigin[1]);
+
         // {width, height}
-        DPIAware::Convert(MonitorFromWindow(window, MONITOR_DEFAULTTONULL), windowOrigin[0], windowOrigin[1]);
+        DPIAware::Convert(MonitorFromWindow(window, MONITOR_DEFAULTTONULL), windowWidth, windowHeight);
 
         RECT rect;
         if (GetWindowRect(window, &rect))
@@ -480,6 +452,64 @@ RECT FancyZonesWindowUtils::AdjustRectForSizeWindowToRect(HWND window, RECT rect
     MapWindowRect(windowOfRect, nullptr, &newWindowRect);
 
     return newWindowRect;
+}
+
+void FancyZonesWindowUtils::DisableRoundCorners(HWND window) noexcept
+{
+    HANDLE handle = GetPropW(window, ZonedWindowProperties::PropertyCornerPreference);
+    if (!handle)
+    {
+        int cornerPreference = DWMWCP_DEFAULT;
+        // save corner preference if it wasn't set already
+        DwmGetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(cornerPreference));
+
+        static_assert(sizeof(int) == 4);
+        static_assert(sizeof(HANDLE) == 8);
+        static_assert(sizeof(HANDLE) == sizeof(uint64_t));
+
+        // 0 is a valid value, so use a high bit to distinguish between 0 and a GetProp fail
+        uint64_t cornerPreference64 = static_cast<uint64_t>(cornerPreference);
+        cornerPreference64 = (cornerPreference64 & 0xFFFFFFFF) | 0x100000000;
+
+        HANDLE preferenceHandle = {};
+        memcpy(&preferenceHandle, &cornerPreference64, sizeof(HANDLE));
+
+        if (!SetPropW(window, ZonedWindowProperties::PropertyCornerPreference, preferenceHandle))
+        {
+            Logger::error(L"Failed to save corner preference, {}", get_last_error_or_default(GetLastError()));
+        }
+    }
+
+    // Set window corner preference on Windows 11 to "Do not round"
+    int cornerPreference = DWMWCP_DONOTROUND;
+    if (!SUCCEEDED(DwmSetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(cornerPreference))))
+    {
+        Logger::error(L"Failed to set DWMWCP_DONOTROUND corner preference");
+    }
+}
+
+void FancyZonesWindowUtils::ResetRoundCornersPreference(HWND window) noexcept
+{
+    HANDLE handle = GetPropW(window, ZonedWindowProperties::PropertyCornerPreference);
+    if (handle)
+    {
+        static_assert(sizeof(int) == 4);
+        static_assert(sizeof(HANDLE) == 8);
+        static_assert(sizeof(HANDLE) == sizeof(uint64_t));
+
+        uint64_t cornerPreference64 = {};
+        memcpy(&cornerPreference64, &handle, sizeof(uint64_t));
+        cornerPreference64 = cornerPreference64 & 0xFFFFFFFF;
+
+        int cornerPreference = static_cast<int>(cornerPreference64);
+
+        if (!SUCCEEDED(DwmSetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(cornerPreference))))
+        {
+            Logger::error(L"Failed to set saved corner preference");
+        }
+
+        RemovePropW(window, ZonedWindowProperties::PropertyCornerPreference);
+    }
 }
 
 void FancyZonesWindowUtils::MakeWindowTransparent(HWND window)

@@ -202,7 +202,7 @@
   <data name="VideoConference_Shortcuts.Header" xml:space="preserve">
     <value>Shortcuts</value>
   </data>
-  <data name="VideoConference_CameraOverlayImageAlt.AutomationProperties.Name" xml:space="preserve">
+  <data name="VideoConference_CameraOverlayImageAlt.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Camera overlay image preview</value>
   </data>
   <data name="VideoConference_CameraOverlayImageBrowse.Content" xml:space="preserve">
@@ -273,10 +273,7 @@
   </data>
   <data name="KeyboardManager_EnableToggle.Header" xml:space="preserve">
     <value>Enable Keyboard Manager</value>
-    <comment>
-      Keyboard Manager enable toggle header
-      do not loc the Product name.  Do you want this feature on / off
-    </comment>
+    <comment>Keyboard Manager enable toggle header. Do not loc the Product name. Do you want this feature on / off</comment>
   </data>
   <data name="KeyboardManager_ProfileDescription.Text" xml:space="preserve">
     <value>Select the profile to display the active key remap and shortcuts</value>
@@ -286,7 +283,7 @@
     <value>Remap a key</value>
     <comment>Keyboard Manager remap keyboard button content</comment>
   </data>
-  <data name="KeyboardManager_RemapKeyboardButton_Accessible.AutomationProperties.Name" xml:space="preserve">
+  <data name="KeyboardManager_RemapKeyboardButton_Accessible.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Remap a key</value>
     <comment>Keyboard Manager remap keyboard button content</comment>
   </data>
@@ -298,7 +295,7 @@
     <value>Remap a shortcut</value>
     <comment>Keyboard Manager remap shortcuts button</comment>
   </data>
-  <data name="KeyboardManager_RemapShortcutsButton_Accessible.AutomationProperties.Name" xml:space="preserve">
+  <data name="KeyboardManager_RemapShortcutsButton_Accessible.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Remap a shortcut</value>
     <comment>Keyboard Manager remap shortcuts button</comment>
   </data>
@@ -312,30 +309,30 @@
   <data name="Shortcut.Header" xml:space="preserve">
     <value>Shortcut</value>
   </data>
-  <data name="RemapKeysList.AutomationProperties.Name" xml:space="preserve">
+  <data name="RemapKeysList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Current Key Remappings</value>
   </data>
-  <data name="RemapShortcutsList.AutomationProperties.Name" xml:space="preserve">
+  <data name="RemapShortcutsList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Current Shortcut Remappings</value>
   </data>
-  <data name="KeyboardManager_RemappedKeysListItem.AutomationProperties.Name" xml:space="preserve">
+  <data name="KeyboardManager_RemappedKeysListItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Key Remapping</value>
     <comment>key as in keyboard key</comment>
   </data>
-  <data name="KeyboardManager_RemappedShortcutsListItem.AutomationProperties.Name" xml:space="preserve">
+  <data name="KeyboardManager_RemappedShortcutsListItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Shortcut Remapping</value>
   </data>
-  <data name="KeyboardManager_RemappedTo.AutomationProperties.Name" xml:space="preserve">
+  <data name="KeyboardManager_RemappedTo.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Remapped to</value>
   </data>
-  <data name="KeyboardManager_ShortcutRemappedTo.AutomationProperties.Name" xml:space="preserve">
+  <data name="KeyboardManager_ShortcutRemappedTo.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Remapped to</value>
   </data>
-  <data name="KeyboardManager_TargetApp.AutomationProperties.Name" xml:space="preserve">
+  <data name="KeyboardManager_TargetApp.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>For Target Application</value>
     <comment>What computer application would this be for</comment>
   </data>
-  <data name="KeyboardManager_Image.AutomationProperties.Name" xml:space="preserve">
+  <data name="KeyboardManager_Image.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Keyboard Manager</value>
     <comment>do not loc, product name</comment>
   </data>
@@ -424,7 +421,7 @@
   <data name="Appearance_GroupSettings.Text" xml:space="preserve">
     <value>Appearance</value>
   </data>
-  <data name="Fancyzones_ImageHyperlinkToDocs.AutomationProperties.Name" xml:space="preserve">
+  <data name="Fancyzones_ImageHyperlinkToDocs.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>FancyZones windows</value>
     <comment>do not loc the Product name</comment>
   </data>
@@ -471,17 +468,17 @@
   <data name="FancyZones_HotkeyPrevTabControl.Description" xml:space="preserve">
     <value>Shortcut for switching to the previous window in the current zone</value>
   </data>
-  <data name="SettingsPage_SetShortcut.AutomationProperties.Name" xml:space="preserve">
+  <data name="SettingsPage_SetShortcut.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Shortcut setting</value>
   </data>
-  <data name="SettingsPage_SetShortcut_Glyph.AutomationProperties.Name" xml:space="preserve">
+  <data name="SettingsPage_SetShortcut_Glyph.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Information Symbol</value>
   </data>
   <data name="FancyZones_LaunchEditorButtonControl.Header" xml:space="preserve">
     <value>Launch layout editor</value>
     <comment>launches the FancyZones layout editor application</comment>
   </data>
-  <data name="FancyZones_LaunchEditorButton_Accessible.AutomationProperties.Name" xml:space="preserve">
+  <data name="FancyZones_LaunchEditorButton_Accessible.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Launch layout editor</value>
     <comment>launches the FancyZones layout editor application</comment>
   </data>
@@ -617,32 +614,60 @@
     <value>Show recently used strings</value>
   </data>
   <data name="FileExplorerPreview_ToggleSwitch_Preview_MD.Header" xml:space="preserve">
-    <value>Enable Markdown preview  (.md, .markdown, .mdown, .mkdn, .mkd, .mdwn, .mdtxt, .mdtext)</value>
-    <comment>Do not loc "Markdown".  Do you want this feature on / off</comment>
+    <value>Markdown</value>
+    <comment>File type, do not translate</comment>
+  </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Preview_MD.Description" xml:space="preserve">
+    <value>.md, .markdown, .mdown, .mkdn, .mkd, .mdwn, .mdtxt, .mdtext</value>
+    <comment>File extensions, should not be altered</comment>
   </data>
   <data name="FileExplorerPreview_ToggleSwitch_Preview_Monaco.Header" xml:space="preserve">
-    <value>Enable developer files preview (Example: .cpp, .py, ...)</value>
-    <comment>Do you want this feature on / off</comment>
+    <value>Source code files (Monaco)</value>
+    <comment>File type, do not translate</comment>
+  </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Preview_Monaco.Description" xml:space="preserve">
+    <value>.cpp, .py, .json, .xml, .csproj, ...</value>
+    <comment>File extensions should not be altered</comment>
   </data>
   <data name="FileExplorerPreview_ToggleSwitch_Preview_SVG.Header" xml:space="preserve">
-    <value>Enable SVG (.svg) preview</value>
-    <comment>Do you want this feature on / off</comment>
+    <value>Scalable Vector Graphics</value>
+    <comment>File type, do not translate</comment>
+  </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Preview_SVG.Description" xml:space="preserve">
+    <value>.svg</value>
+    <comment>File extension, should not be altered</comment>
   </data>
   <data name="FileExplorerPreview_ToggleSwitch_Preview_PDF.Header" xml:space="preserve">
-    <value>Enable PDF (.pdf) preview</value>
-    <comment>Do you want this feature on / off</comment>
+    <value>Portable Document Format</value>
+    <comment>File type, do not translate</comment>
   </data>
-  <data name="FileExplorerPreview_ToggleSwitch_SVG_Thumbnail.Header" xml:space="preserve">
-    <value>Enable SVG (.svg) thumbnails</value>
-    <comment>Do you want this feature on / off</comment>
+  <data name="FileExplorerPreview_ToggleSwitch_Preview_PDF.Description" xml:space="preserve">
+    <value>.pdf</value>
+    <comment>File extension, should not be altered</comment>
   </data>
-  <data name="FileExplorerPreview_ToggleSwitch_STL_Thumbnail.Header" xml:space="preserve">
-    <value>Enable STL (.stl) thumbnails</value>
-    <comment>Do you want this feature on / off</comment>
+  <data name="FileExplorerPreview_ToggleSwitch_Thumbnail_SVG.Header" xml:space="preserve">
+    <value>Scalable Vector Graphics</value>
+    <comment>File type, do not translate</comment>
   </data>
-  <data name="FileExplorerPreview_ToggleSwitch_PDF_Thumbnail.Header" xml:space="preserve">
-    <value>Enable PDF (.pdf) thumbnails</value>
-    <comment>Do you want this feature on / off</comment>
+  <data name="FileExplorerPreview_ToggleSwitch_Thumbnail_SVG.Description" xml:space="preserve">
+    <value>.svg</value>
+    <comment>File extension, should not be altered</comment>
+  </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Thumbnail_STL.Header" xml:space="preserve">
+    <value>Stereolithography</value>
+    <comment>File type, do not translate</comment>
+  </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Thumbnail_STL.Description" xml:space="preserve">
+    <value>.stl</value>
+    <comment>File extension, should not be altered</comment>
+  </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Thumbnail_PDF.Header" xml:space="preserve">
+    <value>Portable Document Format</value>
+    <comment>File type, do not translate</comment>
+  </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Thumbnail_PDF.Description" xml:space="preserve">
+    <value>.pdf</value>
+    <comment>File extension, should not be altered</comment>
   </data>
   <data name="FileExplorerPreview.ModuleDescription" xml:space="preserve">
     <value>These settings allow you to manage your Windows File Explorer custom preview handlers.</value>
@@ -726,10 +751,10 @@
     <value>Enable Image Resizer</value>
     <comment>do not loc the Product name.  Do you want this feature on / off</comment>
   </data>
-  <data name="ImagesSizesListView.AutomationProperties.Name" xml:space="preserve">
+  <data name="ImagesSizesListView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Image Size</value>
   </data>
-  <data name="ImageResizer_Configurations.AutomationProperties.Name" xml:space="preserve">
+  <data name="ImageResizer_Configurations.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Configurations</value>
   </data>
   <data name="ImageResizer_Name.Header" xml:space="preserve">
@@ -747,11 +772,11 @@
   <data name="ImageResizer_Size.Header" xml:space="preserve">
     <value>Unit</value>
   </data>
-  <data name="RemoveButton.AutomationProperties.Name" xml:space="preserve">
+  <data name="RemoveButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Remove</value>
     <comment>Removes a user defined setting group for Image Resizer</comment>
   </data>
-  <data name="ImageResizer_Image.AutomationProperties.Name" xml:space="preserve">
+  <data name="ImageResizer_Image.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Image Resizer</value>
   </data>
   <data name="ImageResizer_AddSizeButton.Content" xml:space="preserve">
@@ -881,7 +906,7 @@
   <data name="FileExplorerPreview.ModuleTitle" xml:space="preserve">
     <value>File Explorer</value>
   </data>
-  <data name="FileExplorerPreview_Image.AutomationProperties.Name" xml:space="preserve">
+  <data name="FileExplorerPreview_Image.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>File Explorer</value>
     <comment>Use same translation as Windows does for File Explorer</comment>
   </data>
@@ -897,21 +922,21 @@
   <data name="PowerLauncher.ModuleTitle" xml:space="preserve">
     <value>PowerToys Run</value>
   </data>
-  <data name="PowerToys_Run_Image.AutomationProperties.Name" xml:space="preserve">
+  <data name="PowerToys_Run_Image.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>PowerToys Run</value>
   </data>
   <data name="PowerRename.ModuleTitle" xml:space="preserve">
     <value>PowerRename</value>
     <comment>do not loc the product name</comment>
   </data>
-  <data name="PowerRename_Image.AutomationProperties.Name" xml:space="preserve">
+  <data name="PowerRename_Image.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>PowerRename</value>
     <comment>do not loc</comment>
   </data>
   <data name="ShortcutGuide.ModuleTitle" xml:space="preserve">
     <value>Shortcut Guide</value>
   </data>
-  <data name="Shortcut_Guide_Image.AutomationProperties.Name" xml:space="preserve">
+  <data name="Shortcut_Guide_Image.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Shortcut Guide</value>
   </data>
   <data name="General_Repository.Text" xml:space="preserve">
@@ -923,7 +948,7 @@
   <data name="General_VersionLastChecked.Text" xml:space="preserve">
     <value>Last checked: </value>
   </data>
-  <data name="General_Version.AutomationProperties.Name" xml:space="preserve">
+  <data name="General_Version.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Version</value>
   </data>
   <data name="Admin_mode.Header" xml:space="preserve">
@@ -1002,13 +1027,16 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
     <value>PowerToys is up to date.</value>
   </data>
   <data name="FileExplorerPreview_IconThumbnail_GroupSettings.Header" xml:space="preserve">
-    <value>Icon Preview</value>
+    <value>Thumbnail icon Preview</value>
+  </data>
+  <data name="FileExplorerPreview_IconThumbnail_GroupSettings.Description" xml:space="preserve">
+    <value>Select the file types for which thumbnail previews must be rendered.</value>
   </data>
   <data name="FileExplorerPreview_PreviewPane.Header" xml:space="preserve">
     <value>Preview Pane</value>
   </data>
   <data name="FileExplorerPreview_PreviewPane.Description" xml:space="preserve">
-    <value>Ensure that Preview Pane is open by toggling the view with Alt + P in File Explorer.</value>
+    <value>Select the file types which must be rendered in the Preview Pane. Ensure that Preview Pane is open by toggling the view with Alt + P in File Explorer.</value>
     <comment>Preview Pane and File Explorer are app/feature names in Windows. 'Alt + P' is a shortcut</comment>
   </data>
   <data name="FileExplorerPreview_RunAsAdminRequired.Title" xml:space="preserve">
@@ -1017,6 +1045,14 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
   <data name="FileExplorerPreview_RebootRequired.Title" xml:space="preserve">
     <value>A reboot may be required for changes to these settings to take effect</value>
   </data>
+  <data name="FileExplorerPreview_PreviewHandlerOutlookIncompatibility.Title" xml:space="preserve">
+    <value>Enabling the preview handlers will override other preview handlers already installed - there have been reports of incompatibility between Outlook and the PDF Preview Handler.</value>
+    <comment>Outlook is the name of a Microsoft product</comment>
+  </data>
+  <data name="FileExplorerPreview_ThumbnailsMightNotAppearOnRemoteFolders.Title" xml:space="preserve">
+    <value>Thumbnails might not appear on paths managed by cloud storage solutions like OneDrive, since these solutions may get their thumbnails from the cloud instead of generating them locally.</value>
+    <comment>OneDrive is the name of a Microsoft product</comment>
+  </data>
   <data name="FancyZones_ExcludeApps_TextBoxControl.PlaceholderText" xml:space="preserve">
     <value>Example: outlook.exe</value>
     <comment>Don't translate outlook.exe</comment>
@@ -1024,7 +1060,7 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
   <data name="ImageResizer_FilenameFormatPlaceholder.PlaceholderText" xml:space="preserve">
     <value>Example: %1 (%2)</value>
   </data>
-  <data name="ImageResizer_FilenameParameters.AutomationProperties.Name" xml:space="preserve">
+  <data name="ImageResizer_FilenameParameters.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Filename parameters</value>
   </data>
   <data name="Radio_Theme_Dark.Content" xml:space="preserve">
@@ -1130,10 +1166,10 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
     <value>Small</value>
     <comment>The size of the image</comment>
   </data>
-  <data name="FancyZones_MoveWindowBasedOnRelativePosition_Accessible.AutomationProperties.Name" xml:space="preserve">
+  <data name="FancyZones_MoveWindowBasedOnRelativePosition_Accessible.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Windows key + Up, down, left or right arrow key to move windows based on relative position</value>
   </data>
-  <data name="FancyZones_MoveWindowLeftRightBasedOnZoneIndex_Accessible.AutomationProperties.Name" xml:space="preserve">
+  <data name="FancyZones_MoveWindowLeftRightBasedOnZoneIndex_Accessible.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Windows key + Left or right arrow keys to move windows based on zone index</value>
   </data>
   <data name="FancyZones_MoveWindowBasedOnRelativePosition_Description.Text" xml:space="preserve">
@@ -1187,7 +1223,7 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
   <data name="PowerLauncher_IncludeInGlobalResultDescription.Text" xml:space="preserve">
     <value>Show results on queries without direct activation command</value>
   </data>
-  <data name="PowerLauncher_EnablePluginToggle.AutomationProperties.Name" xml:space="preserve">
+  <data name="PowerLauncher_EnablePluginToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Enable plugin</value>
   </data>
   <data name="PowerLauncher_EnablePluginToggle.OnContent" xml:space="preserve">
@@ -1240,10 +1276,10 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
   <data name="Run_PluginsLoading.Text" xml:space="preserve">
     <value>Plugins are loading...</value>
   </data>
-  <data name="ColorPicker_ButtonDown.AutomationProperties.Name" xml:space="preserve">
+  <data name="ColorPicker_ButtonDown.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Move the color down</value>
   </data>
-  <data name="ColorPicker_ButtonUp.AutomationProperties.Name" xml:space="preserve">
+  <data name="ColorPicker_ButtonUp.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Move the color up</value>
   </data>
   <data name="FancyZones_FlashZonesOnQuickSwitch.Content" xml:space="preserve">
@@ -1271,7 +1307,7 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
     <value>Let's get started!</value>
   </data>
   <data name="Oobe_PowerToysDescription.Text" xml:space="preserve">
-    <value>Welcome to PowerToys!  These overviews will help you quickly learn the basics of all our utilities.</value>
+    <value>Welcome to PowerToys! These overviews will help you quickly learn the basics of all our utilities.</value>
   </data>
   <data name="Oobe_GettingStarted.Text" xml:space="preserve">
     <value>Getting started</value>
@@ -1292,7 +1328,7 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
     <value>FancyZones is a window manager that makes it easy to create complex window layouts and quickly position windows into those layouts.</value>
   </data>
   <data name="Oobe_FileExplorer.Description" xml:space="preserve">
-    <value>PowerToys introduces add-ons to the Windows File Explorer that will enable files like Markdown files (.md), PDF files (.pdf), SVG icons (.svg), STL files (.stl), Gcode files (.gcode) and developer files to be viewed in the preview pane. It introduces file explorer thumbnail support for a number of these file types as well.</value>
+    <value>PowerToys introduces add-ons to the Windows File Explorer that will enable files like Markdown (.md), PDF (.pdf), SVG (.svg), STL (.stl), G-code (.gcode) and developer files to be viewed in the preview pane. It introduces File Explorer thumbnail support for a number of these file types as well.</value>
   </data>
   <data name="Oobe_ImageResizer.Description" xml:space="preserve">
     <value>Image Resizer is a Windows shell extension for simple bulk image-resizing.</value>
@@ -1559,10 +1595,10 @@ From there, simply click on one of the supported files in the File Explorer and 
   <data name="ImageResizer_Unit_Pixel" xml:space="preserve">
     <value>Pixels</value>
   </data>
-  <data name="EditButton.AutomationProperties.Name" xml:space="preserve">
+  <data name="EditButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="ImageResizer_EditSize.AutomationProperties.Name" xml:space="preserve">
+  <data name="ImageResizer_EditSize.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Edit size</value>
   </data>
   <data name="No" xml:space="preserve">
@@ -1585,10 +1621,10 @@ From there, simply click on one of the supported files in the File Explorer and 
   <data name="ExcludedApps.Header" xml:space="preserve">
     <value>Excluded apps</value>
   </data>
-  <data name="Enable_ColorFormat.AutomationProperties.Name" xml:space="preserve">
+  <data name="Enable_ColorFormat.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Enable colorformat</value>
   </data>
-  <data name="More_Options_Button.AutomationProperties.Name" xml:space="preserve">
+  <data name="More_Options_Button.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>More options</value>
   </data>
   <data name="More_Options_ButtonTooltip.Text" xml:space="preserve">
@@ -1624,7 +1660,7 @@ From there, simply click on one of the supported files in the File Explorer and 
   </data>
   <data name="LearnMore_PowerPreview.Text" xml:space="preserve">
     <value>Learn more about File Explorer add-ons</value>
-    <comment>File Explorer is a product name, do not loc</comment>
+    <comment>File Explorer is a product name, localize as Windows does</comment>
   </data>
   <data name="LearnMore_PowerRename.Text" xml:space="preserve">
     <value>Learn more about PowerRename</value>
@@ -1680,7 +1716,7 @@ From there, simply click on one of the supported files in the File Explorer and 
   <data name="Launch_ShortcutGuide.Content" xml:space="preserve">
     <value>Launch Shortcut Guide</value>
   </data>
-  <data name="ColorPicker_ColorFormat_ToggleSwitch.AutomationProperties.Name" xml:space="preserve">
+  <data name="ColorPicker_ColorFormat_ToggleSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Show format in editor</value>
   </data>
   <data name="GeneralPage_Documentation.Text" xml:space="preserve">
@@ -1689,7 +1725,7 @@ From there, simply click on one of the supported files in the File Explorer and 
   <data name="PowerLauncher_SearchList.PlaceholderText" xml:space="preserve">
     <value>Search this list</value>
   </data>
-  <data name="PowerLauncher_SearchList.AutomationProperties.Name" xml:space="preserve">
+  <data name="PowerLauncher_SearchList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Search this list</value>
   </data>
   <data name="Awake.SecondaryLinksHeader" xml:space="preserve">
@@ -1933,19 +1969,19 @@ From there, simply click on one of the supported files in the File Explorer and 
   <data name="VideoConference_RunAsAdminRequired.Title" xml:space="preserve">
     <value>You need to run as administrator to modify these settings.</value>
   </data>
-  <data name="FileExplorerPreview_ToggleSwitch_GCODE_Thumbnail.Header" xml:space="preserve">
-    <value>Enable G-code (.gcode) thumbnails</value>
-    <comment>Do you want this feature on / off</comment>
+  <data name="FileExplorerPreview_ToggleSwitch_Thumbnail_GCODE.Header" xml:space="preserve">
+    <value>Geometric Code</value>
+    <comment>File type, do not translate</comment>
   </data>
-  <data name="FileExplorerPreview_ToggleSwitch_GCODE_Thumbnail.Description" xml:space="preserve">
-    <value>Only .gcode files with embedded thumbnails are supported</value>
-  </data>
-  <data name="FileExplorerPreview_ToggleSwitch_Preview_GCODE.Description" xml:space="preserve">
+  <data name="FileExplorerPreview_ToggleSwitch_Thumbnail_GCODE.Description" xml:space="preserve">
     <value>Only .gcode files with embedded thumbnails are supported</value>
   </data>
   <data name="FileExplorerPreview_ToggleSwitch_Preview_GCODE.Header" xml:space="preserve">
-    <value>Enable G-code (.gcode) preview</value>
-    <comment>Do you want this feature on / off</comment>
+    <value>Geometric Code</value>
+    <comment>File type, do not translate</comment>
+    </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Preview_GCODE.Description" xml:space="preserve">
+    <value>Only .gcode files with embedded thumbnails are supported</value>
   </data>
   <data name="FancyZones_NumberColor.Header" xml:space="preserve">
     <value>Number color</value>
@@ -2053,6 +2089,10 @@ From there, simply click on one of the supported files in the File Explorer and 
     <value>Attribution</value>
     <comment>giving credit to the projects this utility was based on</comment>
   </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Monaco_Wrap_Text.Content" xml:space="preserve">
+    <value>Wrap text</value>
+    <comment>Feature on or off</comment>
+  </data>
   <data name="FancyZones_AllowPopupWindowSnap.Description" xml:space="preserve">
     <value>This setting can affect all popup windows including notifications</value>
   </data>
@@ -2064,5 +2104,11 @@ From there, simply click on one of the supported files in the File Explorer and 
   </data>
   <data name="Shell_WhatsNew.Content" xml:space="preserve">
     <value>What's new</value>
+  </data>
+  <data name="FancyZones_DisableRoundCornersOnWindowSnap.Description" xml:space="preserve">
+    <value>Works on Windows 11 </value>
+  </data>
+  <data name="FancyZones_DisableRoundCornersOnWindowSnap.Header" xml:space="preserve">
+    <value>Disable round corners when window is snapped</value>
   </data>
 </root>
